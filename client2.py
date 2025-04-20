@@ -26,6 +26,8 @@ def receive_messages():
     while True:
         try:
             message=sub_socket.recv_string()
+            if message.startswith(nickname):
+                continue
             logging.info(f"[받음] {message}")
         except Exception as e:
             logging.error(f"수신 에러: {e}")

@@ -25,6 +25,8 @@ def receive_messages():
     while True:
         try:
             message=sub_socket.recv_string()
+            if message.startswith(nickname):
+                continue
             logging.info(f"[받음] {message}")
         except Exception as e:
             logging.error(f"수신 에러: {e}")
@@ -34,7 +36,7 @@ thread=threading.Thread(target=receive_messages,daemon=True)
 thread.start()
 
 
-logging.info("채팅 시작! 메시지를 입력하세요. (종료: exit)")
+logging.info("User1의 채팅 시작! 메시지를 입력하세요. (종료: exit)")
 while True:
     msg=input()
     if msg.lower()=="exit":
